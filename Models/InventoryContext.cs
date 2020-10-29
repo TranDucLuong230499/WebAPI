@@ -13,8 +13,10 @@ namespace WebAPI.Models
 
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
-        
+
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
         protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
         {
             if (!optionsBuilder.IsConfigured)
             {

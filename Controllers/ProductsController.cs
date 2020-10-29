@@ -10,7 +10,6 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -23,8 +22,10 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Products
-        [HttpGet]
+        [HttpGet("GetProducts")]
+#pragma warning disable CS0436 // Type conflicts with imported type
         public async Task<ActionResult<IEnumerable<Products>>> GetProducts(bool? inStock, int? skip, int? take)
+#pragma warning restore CS0436 // Type conflicts with imported type
         {
 
             var products = _context.Products.AsQueryable();
@@ -48,8 +49,10 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}")]
+        [HttpGet("GetProducts/{id}")]
+#pragma warning disable CS0436 // Type conflicts with imported type
         public async Task<ActionResult<Products>> GetProducts(int id)
+#pragma warning restore CS0436 // Type conflicts with imported type
         {
             var products = await _context.Products.FindAsync(id);
 
@@ -64,8 +67,10 @@ namespace WebAPI.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        [HttpPut("PutProducts/{id}")]
+#pragma warning disable CS0436 // Type conflicts with imported type
         public async Task<IActionResult> PutProducts(int id, Products products)
+#pragma warning restore CS0436 // Type conflicts with imported type
         {
             if (id != products.ProductId)
             {
@@ -96,8 +101,10 @@ namespace WebAPI.Controllers
         // POST: api/Products
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
+        [HttpPost("PostProducts")]
+#pragma warning disable CS0436 // Type conflicts with imported type
         public async Task<ActionResult<Products>> PostProducts(Products products)
+#pragma warning restore CS0436 // Type conflicts with imported type
         {
             _context.Products.Add(products);
             await _context.SaveChangesAsync();
@@ -106,8 +113,10 @@ namespace WebAPI.Controllers
         }
 
         // DELETE: api/Products/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteProducts/{id}")]
+#pragma warning disable CS0436 // Type conflicts with imported type
         public async Task<ActionResult<Products>> DeleteProducts(int id)
+#pragma warning restore CS0436 // Type conflicts with imported type
         {
             var products = await _context.Products.FindAsync(id);
             if (products == null)
