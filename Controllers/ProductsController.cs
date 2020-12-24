@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -67,7 +68,8 @@ namespace WebAPI.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("PutProducts/{id}")]
+        [HttpPut]
+        [Route("PutProducts/{id}")]
 #pragma warning disable CS0436 // Type conflicts with imported type
         public async Task<IActionResult> PutProducts(int id, Products products)
 #pragma warning restore CS0436 // Type conflicts with imported type
@@ -94,8 +96,7 @@ namespace WebAPI.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
+            return Ok(new { result = "success", id });
         }
 
         // POST: api/Products
@@ -127,7 +128,7 @@ namespace WebAPI.Controllers
             _context.Products.Remove(products);
             await _context.SaveChangesAsync();
 
-            return products;
+            return Ok(new { result = "success", id });
         }
 
         private bool ProductsExists(int id)
